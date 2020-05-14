@@ -1,25 +1,21 @@
+
+variable "credentials" {
+  default = "common-service-account.json"
+}
+
 variable "deployment_environment" {
   default = "tools"
   description = "Namespace of the deployment <It will be created>"
 }
 
-variable "vault_token" {
-  description = "Please enter token for Vault."
-}
-
-variable "vault_service_port" {
-  default     = 8082
-  description = "Please do not change this ports."
-}
-
-variable "nexus_service_port" {
-  default     = 8083
-  description = "Please do not change this ports."
-}
-
-variable "tiller_version" {
-  default     = "v2.11.0"
-  description = "Please provide version of the tiller."
+variable "nexus" {
+  type = "map"
+  default = {
+    admin_password     = "fuchicorp"
+    docker_repo_port   = 8085
+    nexus_docker_image = "quay.io/travelaudience/docker-nexus-proxy"
+    nexus_ip_ranges    = "10.16.0.27/8, 50.194.68.229/32"
+  }
 }
 
 variable "tiller_namespace" {
@@ -27,16 +23,13 @@ variable "tiller_namespace" {
   description = "Tiller by default will deploy to kube-system"
 }
 
-variable "repo_port" {
-  default = 8085
-}
 
 variable "email" {
   default = "fuchicorpsolutions@gmail.com"
 }
 
 variable "google_project_id" {
-  default = "commonteamfour"
+  default = "angular-unison-267720"
 }
 
 variable "jenkins" {
@@ -45,8 +38,8 @@ variable "jenkins" {
   default = {
     admin_user             = "admin"
     admin_password         = "password"
-    jenkins_auth_client_id = "c4a47e4cc6e2c0b5ef07"
-    jenkins_auth_secret    = "1c9bac1edf0ab85506cb828d338d8a3fef6a922b"
+    jenkins_auth_client_id = "id"
+    jenkins_auth_secret    = "secret"
     git_token              = "awdiahwd12ehhaiodd"
   }
 }
@@ -59,8 +52,23 @@ variable "grafana" {
     grafana_username = "admin"
     grafana_password = "password"
     grafana-name     = "grafana"
+    smtp_username    = "smtp-user"
+    smtp_password    = "password"
+    smtp_host        = "smtp.gmail.com:587"
   }
 }
+
+variable "kube_dashboard" {
+  type = "map"
+  default {
+    github_auth_client_id = "id"
+    github_auth_secret    = "secret"
+    github_organization   = "mkarimi20"
+    proxy_cookie_secret   = "exampleproxysecret"
+  }
+}
+
+
 
 variable "google_domain_name" {
   default = "fuchicorp.com"
@@ -70,3 +78,4 @@ variable "google_domain_name" {
 variable "deployment_name" {
   default = "common_tools"
 }
+
